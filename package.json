@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "workspaces": [
+    "client",
+    "studio"
+  ],
+  "scripts": {
+    "dev:client": "cd client && npm run dev",
+    "dev:studio": "cd studio && npm run dev",
+    "build:client": "cd client && npm run build",
+    "build:studio": "cd studio && npm run build"
+  }
+} 
