@@ -1,0 +1,13 @@
+[
+  {
+    "path": "/bbf",
+    "name":"Bean Bag Frens",
+    "component": "bbf",
+    "size":"2000",
+    "contract":"0x68bd8b7c45633de6d7afd0b1f7b86b37b8a3c02a",
+    "api":"c129ad7b2d5046ca9cf676542aa59b90",
+    "gm":true,
+    "trait":"Body",
+    "custom":false
+  }
+]

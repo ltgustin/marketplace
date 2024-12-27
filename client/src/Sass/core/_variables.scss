@@ -1,0 +1,25 @@
+:root { 
+    --color_primary:#4CC9F0;
+    --color_blue:#4361EE;
+    --color_black:#141515;
+    --color_white:#ffffff;
+    --color_gray:#EDFAFE;
+    --color_gray_dark:#aaaaaa;
+}
+
+$sm: 830px;
+
+$black: var(--color_black);
+$white: var(--color_white);
+$gray: var(--color_gray);
+$grey: $gray;
+$gray_dark: var(--color_gray_dark);
+$grey_dark: $gray_dark;
+$purple: var(--color_primary);
+$primary:$purple;
+$blue: var(--color_blue);
+
+$font: 'Nunito','Arial',sans-serif;
+
+$regular: 400;
+$bold: 700;

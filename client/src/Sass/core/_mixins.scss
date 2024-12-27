@@ -1,0 +1,5 @@
+//.example {font-size: rem(14px);}
+@function rem($size){
+    $remSize: calc($size/10);
+    @return #{$remSize}rem;
+}

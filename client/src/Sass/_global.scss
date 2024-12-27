@@ -1,0 +1,148 @@
+html,
+body {
+    height:100%;
+}
+
+html {
+    font-size:62.5%;
+}
+
+body{
+    margin:0;
+    padding:0 0 0 rem(375);
+    color:white;
+    background:#343535;
+    font:$regular rem(18)/1.6 $font;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::placeholder {
+    color:#999;
+    opacity:1;
+}
+
+input:valid {
+  color: green;
+}
+input:invalid {
+  color: red;
+}
+
+#root {
+    height:100%;
+    overflow:scroll;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color:white;
+    margin-bottom:rem(20);
+    line-height:1.1;
+    display:inline-flex;
+    align-items:center;
+    grid-gap:rem(15);
+
+    &.hasnum {
+        position:relative;
+        top:-2px;
+    }
+    
+    strong {
+        color:$purple;
+        font-weight:$bold;
+    }
+
+    .num {
+        color:$black;
+        background:$primary;
+        border-radius:50%;
+        width:rem(45);
+        height:rem(45);
+        font-size:rem(24);
+        font-weight:$bold;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+    }
+}
+
+h1 {
+    font-weight:$regular;
+    font-size:rem(25);
+    display:block;
+    width:100%;
+    font-size: clamp(2.5rem, calc(2.4766rem + 0.731vw), 3.5rem);
+}
+
+h2 {
+    font-size:rem(22);
+    font-size: clamp(2.2rem, calc(1.963rem + 1.1852vw), 3rem);
+}
+
+.d-flex {
+    display:flex !important;
+}
+
+.gap-30 {
+    grid-gap:rem(30);
+}
+
+.right-wrap {
+    padding-right:rem(50);
+}
+
+.right-top {
+    align-items:center;
+    justify-content:space-between;
+    padding:rem(20) 0;
+    margin-bottom:rem(30);
+}
+
+.container {
+}
+
+.btn {
+    color:$black;
+    border:0;
+    height:rem(56);
+    padding:0 rem(30);
+    font-size:rem(18);
+    display:inline-flex;
+    grid-gap:rem(10);
+    justify-content:center;
+    align-items:center;
+    font-weight:$bold;
+    border-radius:60px;
+    text-decoration:none;
+    background:$purple;
+    transition:all 350ms ease-in-out;
+
+    &:hover {
+        background:$white;
+    }
+    &.small {
+        height:rem(40);
+        padding:0 rem(20);
+        font-size:rem(16);
+    }
+
+    svg {
+
+    }
+
+    &.blue {
+        background:$blue;
+
+        &:hover {
+            background:$purple;
+        }
+    }
+}
