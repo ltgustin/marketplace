@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Asset({assetId,contract,apikey,setError}) {
+function Asset({assetId,contract,apiKey,setError}) {
   const [asset, setAsset] = useState('');
   const [rarity, setRarity] = useState('');
   const [rarityScale, setRarityScale] = useState();
@@ -19,7 +19,7 @@ function Asset({assetId,contract,apikey,setError}) {
   const getSingleAsset = {
     method: 'GET',
     url: 'https://api.opensea.io/api/v2/chain/ethereum/contract/'+contract+'/nfts/'+assetId,
-    headers: {accept: 'application/json', 'X-API-KEY': apikey}
+    headers: {accept: 'application/json', 'X-API-KEY': apiKey}
   };
 
   useEffect(() => {

@@ -1,0 +1,241 @@
+.inventory {
+    .inventory-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        h1 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .inventory-tabs {
+            display: flex;
+            gap: 1rem;
+
+            .tab {
+                padding: 0.5rem 1.5rem;
+                border: none;
+                border-radius: 6px;
+                background: var(--card-bg);
+                color: var(--text-secondary);
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: var(--card-bg-secondary);
+                }
+
+                &.active {
+                    background: var(--accent-color);
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .inventory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 1rem 0;
+    }
+
+    .raffle-tickets-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-secondary);
+        background: var(--card-bg);
+        border-radius: 12px;
+    }
+}
+
+.inventory-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+
+    .item-image {
+        position: relative;
+        width: 100%;
+        padding-top: 75%;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .item-details {
+        padding: 1.5rem;
+
+        h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: rem(16);
+        }
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: rem(16);
+            color: var(--text-secondary);
+        }
+    }
+}
+
+.raffle-ticket-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 1.5rem;
+
+    .item-image {
+        width: 200px;
+        min-width: 200px;
+        height: 200px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .item-details {
+        flex: 1;
+        padding: 1.5rem;
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+
+            h3 {
+                margin: 0;
+                font-size: 1.25rem;
+            }
+
+            .time-status {
+                font-size: 0.9rem;
+
+                .time-left {
+                    color: var(--accent-color);
+                    font-weight: bold;
+                }
+
+                .ended {
+                    color: var(--error-color);
+                    font-weight: bold;
+                }
+            }
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+    }
+
+    .ticket-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: var(--card-bg-secondary);
+        border-radius: 8px;
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .label {
+                font-size: rem(16);
+                color: var(--text-secondary);
+                margin-bottom: 0.25rem;
+            }
+
+            .value {
+                font-size: rem(18);
+                font-weight: bold;
+                color: var(--accent-color);
+            }
+        }
+    }
+
+    .purchase-history {
+        margin-top: 1.5rem;
+
+        h4 {
+            font-size: rem(16);
+            margin: 0 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .history-list {
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 1rem;
+
+            .history-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid var(--border-color);
+                font-size: rem(16);
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                .quantity {
+                    color: var(--success-color);
+                    font-weight: bold;
+                }
+
+                .date {
+                    color: var(--text-secondary);
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .raffle-ticket-item {
+        flex-direction: column;
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+        }
+
+        .ticket-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}

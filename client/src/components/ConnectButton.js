@@ -1,136 +1,145 @@
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSanityUser } from '../hooks/useSanityUser'
+import { storage } from '../utils/localStorage'
 
-function ConnectButton({address,setAddress}) {
+function ConnectButton({address, setAddress}) {
+  const { userData, loading, error, createUser } = useSanityUser(address)
   const [walletConnectBtn, setConnectText] = useState("Connect Wallet");
   const [disconnect, setDisconnect] = useState(false);
-
-  const web3 = new Web3(window.ethereum);
   const [wallet, setWallet] = useState(null)
-  const userAddress = '';
 
   // truncate the wallet address
-  var truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/;
-  var truncateEthAddress = function (address) {
-    var match = address.match(truncateRegex);
-      if (!match)
-        return address;
-    return match[1] + "\u2026" + match[2];
-  };
+  const truncateRegex = /^(0x[a-zA-Z0-9]{4})[a-zA-Z0-9]+([a-zA-Z0-9]{4})$/
+  const truncateEthAddress = function (address) {
+    const match = address.match(truncateRegex)
+    if (!match) return address
+    return match[1] + "\u2026" + match[2]
+  }
 
   // DISCONNECT WALLET
   const disconnectWallet = async () => {
     try {
-      if (typeof window.ethereum !== 'undefined') {
-        setWallet(null);
-        localStorage.removeItem('userWalletAddress')
-        setConnectText("Connect Wallet")
-      }
+      setWallet(null)
+      storage.clearUserData()
+      setAddress(null)
+      setConnectText("Connect Wallet")
     } catch (error) {
-      alert('Error disconnecting wallet:', error);
+      console.error('Error disconnecting wallet:', error)
     }
   }
-
-  useEffect(() => {
-    const storedWalletAddress = localStorage.getItem('userWalletAddress');
-    if (storedWalletAddress) {
-      setWallet(storedWalletAddress)
-      setConnectText(truncateEthAddress(storedWalletAddress))
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleAccountsChanged = (accounts) => {
-      if (accounts.length > 0) {
-        setAddress(accounts[0]);
-        setConnectText(truncateEthAddress(accounts[0]));
-      } else {
-        setAddress(null);
-        setConnectText("Connect Wallet");
-      }
-    };
-
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', handleAccountsChanged);
-    }
-
-    // Cleanup function to remove the event listener
-    return () => {
-      if (window.ethereum) {
-        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
-      }
-    };
-  }, [setAddress]);
 
   // CONNECT WALLET
-  async function connectWallet() {
-    // already stored address
-    if(wallet) {
-      setConnectText(truncateEthAddress(wallet))
-    // nothing stored - grab it from the wallet
-    } else {
-      if (typeof window.ethereum !== 'undefined') {
-        try {
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        // Request account access
+        const accounts = await window.ethereum.request({ 
+          method: 'eth_requestAccounts' 
+        })
+        
+        const userAddress = accounts[0]
 
-          const web3 = new Web3(window.ethereum);
-
-          const accounts = await web3.eth.getAccounts();
-          const userAddress = accounts[0];
-
-          setConnectText(truncateEthAddress(userAddress))
-
-          // lets save it to local storage
-          if (userAddress) {
-            setAddress(userAddress)
-            localStorage.setItem('userWalletAddress', userAddress);
-          }
-        } catch (error) {
-          console.error(error);
+        // Create user in Sanity if they don't exist
+        if (userAddress && !userData) {
+          await createUser({
+            walletAddress: userAddress,
+            baseAmount: 0,
+            multiplier: 1,
+            perDay: 0,
+            tokens: 0,
+            lastSync: new Date().toISOString()
+          })
         }
-      } else {
-        alert('No wallet detected. Please install MetaMask.');
+
+        setAddress(userAddress)
+        setWallet(userAddress)
+        setConnectText(truncateEthAddress(userAddress))
+        storage.saveUserData({ 
+          walletAddress: userAddress, 
+          tokens: 0, 
+          lastCalculationTimestamp: Date.now() 
+        })
+      } catch (error) {
+        console.error('Error connecting wallet:', error)
       }
+    } else {
+      alert('No wallet detected. Please install MetaMask.')
     }
   }
 
-  // WALLET CHANGE
-  if (typeof window.ethereum !== 'undefined') {
-    window.ethereum.on('accountsChanged', (accounts) => {
-      if (accounts.length === 0) {
-        disconnectWallet();
+  // Load wallet from storage on mount
+  useEffect(() => {
+    const { walletAddress } = storage.loadUserData()
+    if (walletAddress) {
+      setWallet(walletAddress)
+      setAddress(walletAddress)
+      setConnectText(truncateEthAddress(walletAddress))
+    }
+  }, [])
+
+  // Handle account changes
+  useEffect(() => {
+    if (typeof window.ethereum !== 'undefined') {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length === 0) {
+          disconnectWallet()
+        } else {
+          const newAddress = accounts[0]
+          setAddress(newAddress)
+          setWallet(newAddress)
+          setConnectText(truncateEthAddress(newAddress))
+          storage.saveUserData({ 
+            walletAddress: newAddress, 
+            tokens: 0, 
+            lastCalculationTimestamp: Date.now() 
+          })
+        }
+      })
+    }
+
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeAllListeners('accountsChanged')
       }
-    });
-  }
-
-  const toggleDisconnect = () => {
-
-  }
+    }
+  }, [])
 
   return (
     <>
-    {wallet
-    ?
-      <div className="wallet-buttons">
+      {wallet ? (
+        <div className="wallet-buttons">
+          <button 
+            className="btn connect-wallet small"
+            onClick={() => {
+              setDisconnect(value => !value)
+            }}
+          >
+            <FontAwesomeIcon icon="link" />
+            {walletConnectBtn}
+          </button>
+          <button 
+            className={`btn disconnect-wallet ${disconnect ? "display" : ""}`}
+            onClick={() => {
+              disconnectWallet()
+            }}
+          >
+            <FontAwesomeIcon icon="link-slash" />
+            Disconnect
+          </button>
+        </div>
+      ) : (
         <button 
           className="btn connect-wallet small"
           onClick={() => {
-            setDisconnect(value => !value);
+            connectWallet()
           }}
-        ><FontAwesomeIcon icon="link" />{walletConnectBtn}</button>
-        <button 
-          className={"btn disconnect-wallet " 
-          + (disconnect ? "display" : "")}
-          onClick={disconnectWallet}
-        ><FontAwesomeIcon icon="link-slash" />Disconnect</button>
-      </div>
-    :
-      <button 
-        className="btn connect-wallet small"
-        onClick={connectWallet}
-      ><FontAwesomeIcon icon="link" />{walletConnectBtn}</button>
-    }
+        >
+          <FontAwesomeIcon icon="link" />
+          {walletConnectBtn}
+        </button>
+      )}
     </>
   );
 }

@@ -485,3 +485,503 @@ nav a:hover:before, nav a.active:before {
 .assets-grid-skeleton .asset:hover span {
   background: var(--color_primary);
 }
+
+.marketplace-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.marketplace-item {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.marketplace-item:hover {
+  transform: translateY(-4px);
+}
+.marketplace-item .item-image {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+}
+.marketplace-item .item-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.marketplace-item .item-details {
+  padding: 1.5rem;
+}
+.marketplace-item .item-details h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+.marketplace-item .item-details p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+.marketplace-item .item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+.marketplace-item .item-meta .cost {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+.marketplace-item .item-meta .quantity,
+.marketplace-item .item-meta .time-left {
+  color: var(--text-secondary);
+}
+.marketplace-item .purchase-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.marketplace-item .purchase-controls input {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  text-align: center;
+}
+.marketplace-item .purchase-controls .purchase-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent-color);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.marketplace-item .purchase-controls .purchase-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.marketplace-item .purchase-controls .purchase-btn:disabled {
+  background: var(--disabled-bg);
+  cursor: not-allowed;
+}
+.marketplace-item .purchase-controls .purchase-btn.disabled {
+  background: var(--error-color);
+}
+
+.raffle .ticket-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--card-bg-secondary);
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-size: 1.6rem;
+}
+.raffle .ticket-info span {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+.raffle .ticket-info span:last-child {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+.raffle .ended {
+  text-align: center;
+  padding: 1rem;
+  background: var(--disabled-bg);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.shop-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+}
+.shop-header .shop-tabs {
+  display: flex;
+  gap: 1rem;
+}
+.shop-header .shop-tabs .tab {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.shop-header .shop-tabs .tab:hover {
+  background: var(--card-bg-secondary);
+}
+.shop-header .shop-tabs .tab.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+.inventory .inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.inventory .inventory-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+}
+.inventory .inventory-header .inventory-tabs {
+  display: flex;
+  gap: 1rem;
+}
+.inventory .inventory-header .inventory-tabs .tab {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.inventory .inventory-header .inventory-tabs .tab:hover {
+  background: var(--card-bg-secondary);
+}
+.inventory .inventory-header .inventory-tabs .tab.active {
+  background: var(--accent-color);
+  color: white;
+}
+.inventory .inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+.inventory .raffle-tickets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+.inventory .empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-radius: 12px;
+}
+
+.inventory-item {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.inventory-item .item-image {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+}
+.inventory-item .item-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.inventory-item .item-details {
+  padding: 1.5rem;
+}
+.inventory-item .item-details h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+.inventory-item .item-details p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+.inventory-item .item-details .item-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+}
+
+.raffle-ticket-item {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+.raffle-ticket-item .item-image {
+  width: 200px;
+  min-width: 200px;
+  height: 200px;
+}
+.raffle-ticket-item .item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.raffle-ticket-item .item-details {
+  flex: 1;
+  padding: 1.5rem;
+}
+.raffle-ticket-item .item-details .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.raffle-ticket-item .item-details .item-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.raffle-ticket-item .item-details .item-header .time-status {
+  font-size: 0.9rem;
+}
+.raffle-ticket-item .item-details .item-header .time-status .time-left {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+.raffle-ticket-item .item-details .item-header .time-status .ended {
+  color: var(--error-color);
+  font-weight: bold;
+}
+.raffle-ticket-item .item-details p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.raffle-ticket-item .ticket-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--card-bg-secondary);
+  border-radius: 8px;
+}
+.raffle-ticket-item .ticket-stats .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.raffle-ticket-item .ticket-stats .stat .label {
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+.raffle-ticket-item .ticket-stats .stat .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+.raffle-ticket-item .purchase-history {
+  margin-top: 1.5rem;
+}
+.raffle-ticket-item .purchase-history h4 {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+  color: var(--text-secondary);
+}
+.raffle-ticket-item .purchase-history .history-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+.raffle-ticket-item .purchase-history .history-list .history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.6rem;
+}
+.raffle-ticket-item .purchase-history .history-list .history-item:last-child {
+  border-bottom: none;
+}
+.raffle-ticket-item .purchase-history .history-list .history-item .quantity {
+  color: var(--success-color);
+  font-weight: bold;
+}
+.raffle-ticket-item .purchase-history .history-list .history-item .date {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .raffle-ticket-item {
+    flex-direction: column;
+  }
+  .raffle-ticket-item .item-image {
+    width: 100%;
+    height: 200px;
+  }
+  .raffle-ticket-item .ticket-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.notifications-wrapper {
+  position: relative;
+  z-index: 1000;
+}
+.notifications-wrapper .notifications-icon {
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+}
+.notifications-wrapper .notifications-icon.has-new .notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: gray;
+  border-radius: 50%;
+}
+.notifications-wrapper .notifications-icon:hover + .notifications-dropdown {
+  display: block;
+}
+.notifications-wrapper .notifications-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 1rem;
+}
+.notifications-wrapper .notifications-dropdown:hover {
+  display: block;
+}
+.notifications-wrapper .notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.notifications-wrapper .notification-item:hover {
+  background: var(--card-bg-secondary);
+}
+.notifications-wrapper .notification-item.unread {
+  background: var(--card-bg-secondary);
+}
+.notifications-wrapper .notification-item:last-child {
+  border-bottom: none;
+}
+.notifications-wrapper .notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.notifications-wrapper .notification-header .win-badge {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+.notifications-wrapper .notification-header .date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.notifications-wrapper .item-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: var(--card-bg);
+  border-radius: 6px;
+}
+.notifications-wrapper .item-preview img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.notifications-wrapper .item-preview span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.notifications-wrapper .no-notifications {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-secondary);
+}
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease;
+}
+.toast.success {
+  border-left: 4px solid var(--success-color);
+}
+.toast.success .icon {
+  color: var(--success-color);
+}
+.toast.error {
+  border-left: 4px solid var(--error-color);
+}
+.toast.error .icon {
+  color: var(--error-color);
+}
+.toast .icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.toast p {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,178 @@
+.marketplace-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.marketplace-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    .item-image {
+        position: relative;
+        width: 100%;
+        padding-top: 75%; // 4:3 aspect ratio
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .item-details {
+        padding: 1.5rem;
+
+        h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: rem(16);
+            line-height: 1.4;
+        }
+    }
+
+    .item-meta {
+        display: flex;
+        flex-wrap:wrap;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: rem(16);
+
+        .cost {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .quantity,
+        .time-left {
+            color: var(--text-secondary);
+        }
+    }
+
+    .purchase-controls {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+
+        input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .purchase-btn {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+
+            &:hover:not(:disabled) {
+                opacity: 0.9;
+            }
+
+            &:disabled {
+                background: var(--disabled-bg);
+                cursor: not-allowed;
+            }
+
+            &.disabled {
+                background: var(--error-color);
+            }
+        }
+    }
+}
+
+// Raffle-specific styles
+.raffle {
+    .ticket-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: var(--card-bg-secondary);
+        border-radius: 6px;
+        margin: 1rem 0;
+        font-size: rem(16);
+
+        span {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+
+            &:last-child {
+                color: var(--accent-color);
+                font-weight: bold;
+            }
+        }
+    }
+
+    .ended {
+        text-align: center;
+        padding: 1rem;
+        background: var(--disabled-bg);
+        border-radius: 6px;
+        color: var(--text-secondary);
+        font-weight: bold;
+    }
+}
+
+// Shop header styles
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1 {
+        margin: 0;
+        color: var(--text-primary);
+    }
+
+    .shop-tabs {
+        display: flex;
+        gap: 1rem;
+
+        .tab {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background: var(--card-bg-secondary);
+            }
+
+            &.active {
+                background: var(--accent-color);
+                color: white;
+            }
+        }
+    }
+}

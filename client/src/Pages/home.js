@@ -4,11 +4,26 @@ import RightTop from '../components/RightTop';
 import ConnectButton from '../components/ConnectButton';
 import Asset from '../components/Asset';
 
-const Home = ({address,setAddress,userTokens,assets,assetsNum,error,setError,contract,apikey,multiplier,perDay,timeLeft}) => {
+const Home = ({
+  address,
+  setAddress,
+  userTokens,
+  assets,
+  assetsNum,
+  error,
+  setError,
+  contract,
+  apiKey,
+  multiplier,
+  perDay,
+  timeLeft
+}) => {
+
   return (
     <div className="page-wrap home">
       <Header 
         current="home"
+        address={address}
       />
 
       <div className="right-wrap">
@@ -36,7 +51,7 @@ const Home = ({address,setAddress,userTokens,assets,assetsNum,error,setError,con
                             key={asset.identifier} 
                             contract={contract}
                             assetId={asset.identifier} 
-                            apikey={apikey}
+                            apiKey={apiKey}
                             error={error}
                             setError={setError}
                             perDay={perDay}
